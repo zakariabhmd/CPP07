@@ -1,20 +1,21 @@
-NAME = templates
-
+NAME = Whatever
 CC = c++
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+SRC = main.cpp
 
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 
+SRCH = Whatever.hpp
 
-SRC = main.cpp 
+OBJ = $(SRC:.cpp=.o)
 
-OBJ =$(SRC:.cpp=.o)
+all: $(NAME)
 
-all : $(NAME)
-
-$(NAME) : $(OBJ) whatever.hpp
+$(NAME): $(OBJ) $(SRCH)
 	$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
 
-clean :
+clean:
 	@rm -rf $(OBJ)
-fclean : clean
+
+fclean: clean
 	@rm -rf $(NAME)
-re : fclean all
+
+re: fclean $(NAME)

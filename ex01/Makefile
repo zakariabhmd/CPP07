@@ -1,20 +1,21 @@
-NAME = templates
-
+NAME = iter
 CC = c++
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+SRC = main.cpp
 
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 
+SRCH = iter.hpp
 
-SRC = main.cpp 
+OBJ = $(SRC:.cpp=.o)
 
-OBJ =$(SRC:.cpp=.o)
+all: $(NAME)
 
-all : $(NAME)
-
-$(NAME) : $(OBJ) iter.hpp
+$(NAME): $(OBJ) $(SRCH)
 	$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
 
-clean :
+clean:
 	@rm -rf $(OBJ)
-fclean : clean
+
+fclean: clean
 	@rm -rf $(NAME)
-re : fclean all
+
+re: fclean $(NAME)
