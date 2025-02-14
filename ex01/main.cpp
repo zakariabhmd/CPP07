@@ -1,11 +1,24 @@
 #include "iter.hpp"
 
-template<typename T>
-void functi(T tst){
-	std::cout << tst << std::endl;
+void printInt(int x) {
+    std::cout << x << " ";
 }
 
-int main(){
-	int arr[] = {1, 2, 3, 4};
-	::iter(arr, 4, functi<int>);
+void printString(const std::string& str) {
+    std::cout << str << " ";
+}
+
+int main() {
+    int intArray[] = {1, 2, 3, 4, 5};
+    std::string strArray[] = {"Hello", "World", "C++", "Templates"};
+
+    std::cout << "Integer array: ";
+    iter(intArray, 5, printInt);
+    std::cout << std::endl;
+
+    std::cout << "String array: ";
+    iter(strArray, 4, printString);
+    std::cout << std::endl;
+
+    return 0;
 }

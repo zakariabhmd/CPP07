@@ -5,53 +5,58 @@
 #include <exception>
 
 template <typename T>
-class Array{
-	private :
-		T *elements;
-		unsigned int size_;
-	public :
-		Array() : elements(NULL), size_(0){}
+class Array {
+private:
+    T* _data;
+    unsigned int _size;
 
-		Array(unsigned int n) : size_(n){
-			elements = new T[n];
-			for (unsigned int i = 0; i < n ; i++)
-				elements[i] = T();
-		}
+public:
+    Array() : _data(nullptr), _size(0) {}
 
-		Array &operator=(const Array &copy){
-			if (this != &copy){
-				delete[] elements;
-				this->size_ = copy.size_;
-				elements = new T[size_];
-				for (unsigned int i = 0; i < size_ ; i++)
-					elements[i] = copy.elements[i];
-			}
-			return *this;
-		}
+    Array(unsigned int n) : _size(n) {
+        _data = new T[n]();
+    }
 
-		Array(const Array &copy) : size_(copy.size_){
-			// *this = copy;
-			elements = new T[size_];
-			for (unsigned int i = 0; i < size_ ; i++)
-				elements[i] = copy.elements[i];
-			
-		}
+    Array(const Array& other) : _size(other._size) {
+        _data = new T[_size];
+        for (unsigned int i = 0; i < _size; i++) {
+            _data[i] = other._data[i];
+        }
+    }
 
-		T &operator[](unsigned int n){
-			if (n >= size_)
-				// std::cerr << ""
-				throw std::out_of_range("out of range");
-			return elements[n];
-		}
+    Array& operator=(const Array& other) {
+        if (this != &other) {
+            delete[] _data;
+            _size = other._size;
+            _data = new T[_size];
+            for (unsigned int i = 0; i < _size; i++) {
+                _data[i] = other._data[i];
+            }
+        }
+        return *this;
+    }
 
-		unsigned int size() const{
-			return size_;
-		}
+    ~Array() {
+        delete[] _data;
+    }
 
-		~Array(){
-			delete[] elements;
-		}
+    T& operator[](unsigned int index) {
+        if (index >= _size) {
+            throw std::out_of_range("Index out of bounds");
+        }
+        return _data[index];
+    }
 
+    const T& operator[](unsigned int index) const {
+        if (index >= _size) {
+            throw std::out_of_range("Index out of bounds");
+        }
+        return _data[index];
+    }
+
+    unsigned int size() const {
+        return _size;
+    }
 };
 
 #endif
