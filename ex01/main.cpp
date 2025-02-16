@@ -10,7 +10,7 @@ void printString(const std::string& str) {
 
 int main() {
     int intArray[] = {1, 2, 3, 4, 5};
-    std::string strArray[] = {"Hello", "World", "C++", "Templates"};
+    std::string strArray[] = {"zakaria", "mcha", "il3b", "kora"};
 
     std::cout << "Integer array: ";
     iter(intArray, 5, printInt);
